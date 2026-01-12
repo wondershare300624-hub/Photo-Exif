@@ -6,7 +6,7 @@
 
 这包含了您在本地运行应用所需的一切。
 
-View your app in AI Studio: https://ai.studio/apps/drive/1oW0b4sL-t0PrJzgkaCwxXRSokFytZe-s
+在AI Studio中查看您的应用：https://ai.studio/apps/drive/1oW0b4sL-t0PrJzgkaCwxXRSokFytZe-s
 
 ##本地运行
 
@@ -18,5 +18,3 @@ View your app in AI Studio: https://ai.studio/apps/drive/1oW0b4sL-t0PrJzgkaCwxXR
 2.将`GEMINI_API_KEY`设置在[.env.local]()中，以您的Gemini API密钥替换
 3.运行应用：
    `npm run dev`
-![正在上传image.png…]()
-![正在上传image.png…]()
