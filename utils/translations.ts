@@ -1,0 +1,107 @@
+
+export const translations = {
+  en: {
+    appTitle: "Gleam Imprint",
+    selectTemplate: "Select Template",
+    changePhoto: "Change Photo",
+    download: "Download",
+    cameraLogo: "Camera LOGO",
+    lensParams: "Lens Parameters",
+    cameraParams: "Camera Parameters",
+    style: "Style",
+    font: "Font",
+    theme: "Theme",
+    toggles: "Display Options",
+    focalLength: "Focal Length",
+    aperture: "Aperture",
+    shutter: "Shutter",
+    iso: "ISO",
+    camera: "Model",
+    lens: "Lens",
+    date: "Date",
+    hideLeft: "Show Device Info",
+    hideRight: "Show Shot Settings",
+    brandText: "Brand Text",
+    uploadLogo: "Upload Logo",
+    logoUrl: "Logo URL",
+    landingTitle: "The Perfect Frame for Your Shot",
+    landingSubtitle: "Instantly generate professional, gallery-grade watermarks with automatic EXIF extraction. Designed for photographers.",
+    landingBtn: "Upload Photo",
+    templates: {
+        classic: "Classic",
+        clean: "Minimal",
+        cinema: "Cinema",
+        polaroid: "Retro DV",
+        blur: "Gaussian Blur",
+        blur_glass: "Blur Overlay",
+        card: "Profile Card",
+        overlay: "Overlay",
+        adobe: "Splash Screen"
+    },
+    themes: {
+        light: "Light",
+        dark: "Dark",
+        yellow: "Bold Yellow"
+    },
+    textColor: "Text Color",
+    colorTarget: "Target Element",
+    targets: {
+        model: "Camera Model",
+        lens: "Lens Specs",
+        date: "Date/Time",
+        location: "GPS Location"
+    }
+  },
+  zh: {
+    appTitle: "拾光印记",
+    selectTemplate: "选择模板:",
+    changePhoto: "更换图片",
+    download: "下载",
+    cameraLogo: "相机LOGO",
+    lensParams: "镜头参数",
+    cameraParams: "相机参数",
+    style: "样式",
+    font: "字体",
+    theme: "主题配色",
+    toggles: "显示选项",
+    focalLength: "焦距",
+    aperture: "光圈",
+    shutter: "快门",
+    iso: "ISO",
+    camera: "相机",
+    lens: "镜头",
+    date: "日期",
+    hideLeft: "显示左边信息",
+    hideRight: "显示右边信息",
+    brandText: "品牌文字",
+    uploadLogo: "上传 Logo",
+    logoUrl: "Logo 链接",
+    landingTitle: "让每个精彩瞬间，都是徕卡影像",
+    landingSubtitle: "自动识别 EXIF 信息，一键生成大师级摄影水印。支持徕卡、索尼、富士等多种风格。",
+    landingBtn: "上传照片",
+    templates: {
+        classic: "经典白框",
+        clean: "极简风格",
+        cinema: "电影感",
+        polaroid: "复古DV",
+        blur: "背景模糊",
+        blur_glass: "模糊+参数叠加",
+        card: "参数卡片",
+        overlay: "图片水印",
+        adobe: "启动窗口"
+    },
+    themes: {
+        light: "经典白",
+        dark: "深邃黑",
+        yellow: "黑底黄字"
+    },
+    textColor: "文字颜色",
+    colorTarget: "修改目标",
+    targets: {
+        model: "相机型号",
+        lens: "镜头参数",
+        date: "拍摄时间",
+        location: "地理位置"
+    }
+  }
+};

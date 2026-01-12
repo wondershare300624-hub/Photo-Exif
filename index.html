@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gleam Imprint - 拾光印记</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@400;500;700&family=Lato:wght@400;700&family=Dancing+Script:wght@400;500;600;700&family=Noto+Serif+SC:wght@300;400;500;700&display=swap');
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #F3F4F6;
+        color: #18181b;
+      }
+
+      /* Custom Scrollbar for sidebars */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      /* iOS Style Toggle Switch */
+      .toggle-checkbox:checked {
+        right: 0;
+        border-color: #10B981;
+      }
+      .toggle-checkbox:checked + .toggle-label {
+        background-color: #10B981;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "html-to-image": "https://aistudiocdn.com/html-to-image@^1.11.13",
+    "date-fns": "https://aistudiocdn.com/date-fns@^4.1.0",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
+    "exifreader": "https://aistudiocdn.com/exifreader@^4.32.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

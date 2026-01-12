@@ -1,0 +1,5 @@
+{
+  "name": "LensFrame - EXIF Watermark Generator",
+  "description": "A professional photo framing tool that automatically extracts EXIF data (Camera, Lens, ISO, Aperture) and generates stylish, branded watermarks for your photography.",
+  "requestFramePermissions": []
+}
