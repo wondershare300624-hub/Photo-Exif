@@ -14,11 +14,17 @@ const App: React.FC = () => {
   const [exif, setExif] = useState<ExifData | null>(null);
   const [loading, setLoading] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [lang, setLang] = useState<Language>('zh'); 
   const [key, setKey] = useState(0); 
   
   const frameRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const imageUrlRef = useRef<string | null>(null);
+
+  useEffect(() => () => {
+    if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current);
+  }, []);
 
   const [config, setConfig] = useState<WatermarkConfig>({
     theme: 'light',
@@ -43,11 +49,20 @@ const App: React.FC = () => {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+      e.target.value = '';
+      if (!file.type.startsWith('image/')) {
+        setError('Please choose a valid image file.');
+        return;
+      }
+      setError(null);
       setLoading(true);
       try {
         const exifData = await parseExif(file);
         setExif(exifData);
-        setImage({ src: URL.createObjectURL(file), file: file });
+        if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current);
+        const src = URL.createObjectURL(file);
+        imageUrlRef.current = src;
+        setImage({ src, file });
         setKey(prev => prev + 1); 
 
         const make = exifData.make.toLowerCase();
@@ -70,6 +85,7 @@ const App: React.FC = () => {
         else if (combined.includes('dji')) setBrand('DJI');
       } catch (err) {
         console.error("Failed to load image", err);
+        setError("Unable to read that image. Please try another file.");
       } finally {
         setLoading(false);
       }
@@ -90,13 +106,17 @@ const App: React.FC = () => {
     try {
       await document.fonts.ready;
       await new Promise((resolve) => setTimeout(resolve, 800));
-      const dataUrl = await toPng(frameRef.current, { quality: 1.0, pixelRatio: 2 });
+      const maxExportSide = 4096;
+      const largestSide = Math.max(frameRef.current.offsetWidth, frameRef.current.offsetHeight);
+      const pixelRatio = Math.max(1, Math.min(2, maxExportSide / largestSide));
+      const dataUrl = await toPng(frameRef.current, { quality: 1.0, pixelRatio, cacheBust: true });
       const link = document.createElement('a');
       link.download = `gleam-imprint-${Date.now()}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {
       console.error('Download failed', err);
+      setError('Export failed. Please try again after the preview finishes loading.');
     } finally {
       setIsDownloading(false);
     }
@@ -173,7 +193,7 @@ const App: React.FC = () => {
   );
 
   return (
-    <div className="h-screen w-screen bg-gray-100 flex flex-col font-sans overflow-hidden">
+    <div className="h-[100dvh] w-screen bg-gray-100 flex flex-col font-sans overflow-hidden">
         <header className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-6 z-50 shadow-sm shrink-0">
              <div className="flex items-center gap-2">
                  <Camera className="w-5 h-5 text-red-600" />
@@ -190,8 +210,8 @@ const App: React.FC = () => {
                 <LandingPage />
             </div>
         ) : (
-            <div className="flex-1 flex overflow-hidden">
-                <div className="flex-1 bg-[#F0F0F0] overflow-hidden flex flex-col relative">
+            <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden">
+                <div className="min-h-[52vh] flex-1 bg-[#F0F0F0] overflow-hidden flex flex-col relative lg:min-h-0">
                      <div className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-auto custom-scrollbar relative bg-gray-200">
                          
                          {/* 复古拍立得相机外观 (吐纸槽) */}
@@ -225,18 +245,19 @@ const App: React.FC = () => {
                          )}
                      </div>
                 </div>
-                <div className="w-[340px] border-l border-gray-200 bg-white z-[110] flex flex-col shadow-xl">
+                <div className="w-full max-h-[48vh] border-t border-gray-200 bg-white z-[110] flex flex-col shadow-xl lg:w-[340px] lg:max-h-none lg:border-l lg:border-t-0">
                     <Controls exif={exif!} config={config} lang={lang} onExifChange={updateExif} onConfigChange={updateConfig} />
                     <div className="p-4 border-t border-gray-100 bg-gray-50 shrink-0 space-y-3">
                          <button onClick={handleDownload} disabled={isDownloading} className={`w-full py-3 rounded-lg font-bold text-white shadow-lg transition-all flex items-center justify-center gap-2 ${isDownloading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#D40000] hover:bg-[#b30000]'}`}>
                             {isDownloading ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : <Upload className="w-4 h-4 rotate-180" />}
                             {isDownloading ? 'Exporting...' : t.download}
                          </button>
-                         <button onClick={() => { setImage(null); setExif(null); }} className="w-full py-2.5 rounded-lg border border-gray-300 font-medium text-gray-600 hover:bg-white transition-all text-sm">{t.changePhoto}</button>
+                         <button onClick={() => { if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current); imageUrlRef.current = null; setImage(null); setExif(null); setError(null); }} className="w-full py-2.5 rounded-lg border border-gray-300 font-medium text-gray-600 hover:bg-white transition-all text-sm">{t.changePhoto}</button>
                     </div>
                 </div>
             </div>
         )}
+        {error && <div role="alert" className="fixed bottom-4 left-1/2 z-[200] -translate-x-1/2 rounded-lg bg-red-600 px-4 py-3 text-sm font-medium text-white shadow-lg">{error}</div>}
         <input type="file" ref={fileInputRef} onChange={handleFileChange} accept="image/*" className="hidden" />
         <style>{`
             @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
