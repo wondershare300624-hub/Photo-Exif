@@ -27,6 +27,9 @@ export const translations = {
     landingTitle: "The Perfect Frame for Your Shot",
     landingSubtitle: "Instantly generate professional, gallery-grade watermarks with automatic EXIF extraction. Designed for photographers.",
     landingBtn: "Upload Photo",
+    landingEyebrow: "FRAME YOUR STORY",
+    landingPrivate: "Processed locally in your browser",
+    landingTemplates: "9 refined frame styles",
     templates: {
         classic: "Classic",
         clean: "Minimal",
@@ -79,6 +82,9 @@ export const translations = {
     landingTitle: "让每个精彩瞬间，都是徕卡影像",
     landingSubtitle: "自动识别 EXIF 信息，一键生成大师级摄影水印。支持徕卡、索尼、富士等多种风格。",
     landingBtn: "上传照片",
+    landingEyebrow: "为瞬间，留下署名",
+    landingPrivate: "照片仅在本地浏览器处理",
+    landingTemplates: "9 款精致相框模板",
     templates: {
         classic: "经典白框",
         clean: "极简风格",
@@ -105,3 +111,4 @@ export const translations = {
     }
   }
 };
+
