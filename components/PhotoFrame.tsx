@@ -184,6 +184,65 @@ export const PhotoFrame = forwardRef<HTMLDivElement, PhotoFrameProps>(
             </div>
           );
 
+        case 'blur':
+          return (
+            <div className="relative isolate overflow-hidden bg-neutral-900 p-6 md:p-12">
+              <img src={imageSrc} className="absolute inset-[-8%] -z-10 h-[116%] w-[116%] object-cover opacity-45 blur-3xl" alt="" />
+              <div className="overflow-hidden rounded-sm bg-white shadow-2xl">
+                <img src={imageSrc} className="block max-h-[75vh] w-full object-contain" alt="Framed photo" />
+                <div className="flex items-center justify-between gap-6 p-5 md:p-8" style={fontStyle}>
+                  <DeviceBrandGroup exif={exif} config={config} themeStyles={themeStyles} />
+                  <div className="flex items-center gap-4 shrink-0">
+                    <ExifParamsGroup exif={exif} config={config} themeStyles={themeStyles} />
+                    <Logo type={config.logoType} customText={config.customLogoText} customUrl={config.customLogoUrl} theme="light" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+
+        case 'card':
+          return (
+            <div className={clsx("p-6 md:p-10", themeStyles.bg)} style={fontStyle}>
+              <div className="overflow-hidden rounded-xl bg-white shadow-2xl md:flex">
+                <img src={imageSrc} className="block aspect-[4/3] w-full object-cover md:w-3/5" alt="Framed photo" />
+                <div className="flex min-h-56 flex-col justify-between gap-8 p-7 md:w-2/5">
+                  <Logo type={config.logoType} customText={config.customLogoText} customUrl={config.customLogoUrl} theme="light" />
+                  <DeviceBrandGroup exif={exif} config={config} themeStyles={{ ...themeStyles, mainText: '#111827', subText: '#6b7280' }} />
+                  <ExifParamsGroup exif={exif} config={config} themeStyles={{ ...themeStyles, mainText: '#111827', subText: '#6b7280' }} />
+                </div>
+              </div>
+            </div>
+          );
+
+        case 'overlay':
+          return (
+            <div className="relative overflow-hidden bg-black" style={fontStyle}>
+              <img src={imageSrc} className="block max-h-[85vh] w-full object-contain" alt="Framed photo" />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-6 pt-24 text-white md:p-10 md:pt-32">
+                <DeviceBrandGroup exif={exif} config={config} themeStyles={{ ...themeStyles, mainText: '#fff', subText: 'rgba(255,255,255,.72)' }} />
+                <div className="flex items-center gap-4 shrink-0">
+                  <ExifParamsGroup exif={exif} config={config} themeStyles={{ ...themeStyles, mainText: '#fff', subText: 'rgba(255,255,255,.72)' }} />
+                  <Logo type={config.logoType} customText={config.customLogoText} customUrl={config.customLogoUrl} theme="dark" />
+                </div>
+              </div>
+            </div>
+          );
+
+        case 'adobe':
+          return (
+            <div className="bg-[#262626] p-5 md:p-10" style={fontStyle}>
+              <div className="overflow-hidden rounded bg-[#1f1f1f] shadow-2xl md:flex">
+                <img src={imageSrc} className="block max-h-[78vh] w-full object-contain md:w-3/4" alt="Framed photo" />
+                <div className="flex flex-col justify-between gap-8 border-t border-white/10 p-6 text-white md:w-1/4 md:border-l md:border-t-0">
+                  <Logo type={config.logoType} customText={config.customLogoText} customUrl={config.customLogoUrl} theme="dark" />
+                  <DeviceBrandGroup exif={exif} config={config} themeStyles={{ ...themeStyles, mainText: '#fff', subText: '#a3a3a3' }} />
+                  <ExifParamsGroup exif={exif} config={config} themeStyles={{ ...themeStyles, mainText: '#fff', subText: '#a3a3a3' }} />
+                </div>
+              </div>
+            </div>
+          );
+
         default:
           return null;
       }
