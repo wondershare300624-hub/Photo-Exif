@@ -1,20 +1,36 @@
-<img width="2008" height="1128" alt="image" src="https://github.com/user-attachments/assets/68a41a39-dcc3-4329-9e7b-00a4eec0bd3e" /><div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Photo EXIF Watermark
 
-#运行并部署您的AI Studio应用
+一个纯前端的照片 EXIF 信息边框与水印生成器。上传照片后可读取可用的拍摄参数，并以多种模板生成可下载的 PNG。
 
-这包含了您在本地运行应用所需的一切。
+## 功能
 
-在AI Studio中查看您的应用：https://ai.studio/apps/drive/1oW0b4sL-t0PrJzgkaCwxXRSokFytZe-s
+- 在浏览器本地读取 EXIF；照片不会上传到服务器
+- 支持相机、镜头、焦距、光圈、快门、ISO、时间和 GPS 信息的手动编辑
+- 九种可用的边框模板：经典、简洁、电影、录像、模糊背景、玻璃、卡片、叠加和暗房
+- 浅色、深色和黄色主题，以及相机品牌/自定义 Logo
+- 中英文界面和移动端布局
+- 导出高质量 PNG，并限制最大渲染尺寸以避免超大图片导致浏览器内存不足
 
-##本地运行
+## 本地运行
 
-**先决条件：**Node.js
+**前置条件：**Node.js 18 或更高版本。
 
+```bash
+npm install
+npm run dev
+```
 
-1.安装依赖：
-   `npm install`
-2.将`GEMINI_API_KEY`设置在[.env.local]()中，以您的Gemini API密钥替换
-3.运行应用：
-   `npm run dev`
+打开终端中显示的本地地址即可使用。
+
+## 生产构建
+
+```bash
+npm run build
+npm run preview
+```
+
+本项目不依赖 API 密钥或后端服务。
+
+## 隐私说明
+
+图片和 EXIF 解析、预览、导出都在浏览器本地完成。请注意：上传的图片可能包含位置等敏感 EXIF 信息；导出或分享前请确认水印中展示的内容。
