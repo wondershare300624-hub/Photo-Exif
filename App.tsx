@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { Upload, Camera, Globe } from 'lucide-react';
+import { Upload, Camera, Globe, Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
 import { toPng } from 'html-to-image';
 import { parseExif } from './utils/exifHelper';
 import { ExifData, WatermarkConfig, Language } from './types';
@@ -122,9 +122,9 @@ const App: React.FC = () => {
     }
   }, [frameRef]);
 
-  // --- 首页视觉锁定组件 (DO NOT MODIFY) ---
   const MockCamera = () => (
-    <div className="relative w-40 h-40 md:w-52 md:h-52 bg-neutral-900 rounded-[2rem] shadow-2xl flex flex-col items-center justify-center border-[6px] border-neutral-800 z-20 mx-auto transform transition-transform hover:scale-105 duration-500">
+    <div className="relative w-36 h-36 md:w-48 md:h-48 bg-neutral-900 rounded-[1.75rem] shadow-[0_28px_70px_-18px_rgba(15,23,42,0.75)] flex flex-col items-center justify-center border-[6px] border-neutral-800 z-20 mx-auto transform transition-transform hover:scale-[1.03] duration-500">
+        <div className="absolute -inset-3 rounded-[2.1rem] border border-white/60 -z-10"></div>
         <div className="absolute top-0 w-1/2 h-2 bg-neutral-800 rounded-b-lg"></div>
         <div className="absolute top-4 md:top-6 flex w-full px-6 justify-between items-start">
             <div className="w-3 h-3 md:w-4 md:h-4 bg-red-500 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.6)] animate-pulse"></div>
@@ -141,7 +141,7 @@ const App: React.FC = () => {
   );
 
   const MockPhoto = ({ src, type = 'classic', rotate = 0, className, delay = 0 }: any) => (
-    <div className={clsx("absolute bg-white shadow-[0_10px_20px_-5px_rgba(0,0,0,0.2)] transition-all duration-500 hover:scale-110 hover:z-50 hover:shadow-2xl", className)} style={{ transform: `rotate(${rotate}deg)`, animationDelay: `${delay}ms` }}>
+    <div className={clsx("absolute bg-white/95 ring-1 ring-black/[0.04] shadow-[0_18px_35px_-14px_rgba(15,23,42,0.42)] transition-all duration-500 hover:scale-105 hover:z-50 hover:shadow-2xl", className)} style={{ transform: `rotate(${rotate}deg)`, animationDelay: `${delay}ms` }}>
         {type === 'classic' ? (
             <div className="w-32 md:w-44 p-1 pb-3 bg-white rounded-sm">
                  <div className="h-24 md:h-32 w-full bg-gray-100 overflow-hidden relative"><img src={src} className="w-full h-full object-cover" alt="mock" /></div>
@@ -160,33 +160,43 @@ const App: React.FC = () => {
   );
 
   const LandingPage = () => (
-    <div className="flex flex-col items-center justify-center h-full w-full relative overflow-hidden bg-[#F3F4F6]">
-        <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-200/40 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] pointer-events-none" />
-        <div className="z-10 flex flex-col items-center text-center px-4 max-w-5xl w-full pt-10 pb-10">
-            <div className="relative w-full h-[320px] md:h-[400px] mb-12 md:mb-16 flex items-center justify-center">
+    <div className="min-h-full flex flex-col items-center justify-center w-full relative overflow-hidden bg-[#f6f4f1]">
+        <div className="absolute inset-4 md:inset-7 rounded-[2rem] border border-black/[0.045] pointer-events-none" />
+        <div className="absolute top-[-25%] right-[-10%] w-[560px] h-[560px] bg-rose-200/40 rounded-full blur-[110px] pointer-events-none" />
+        <div className="absolute bottom-[-18%] left-[-14%] w-[620px] h-[620px] bg-sky-200/35 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-[28%] left-[8%] hidden lg:block text-[10px] font-bold tracking-[0.28em] text-gray-400 [writing-mode:vertical-rl]">KEEP THE MOMENT</div>
+        <div className="z-10 flex flex-col items-center text-center px-5 max-w-6xl w-full py-10 md:py-14">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gray-200/80 bg-white/75 px-3 py-1.5 text-[11px] font-bold tracking-[0.12em] text-gray-600 shadow-sm backdrop-blur">
+                <Sparkles className="h-3.5 w-3.5 text-[#D40000]" />
+                {t.landingEyebrow}
+            </div>
+            <div className="relative w-full h-[255px] sm:h-[310px] md:h-[345px] mt-5 mb-8 md:mb-10 flex items-center justify-center">
+                <div className="absolute h-40 w-40 md:h-56 md:w-56 rounded-full border border-dashed border-gray-300/80 animate-[spin_24s_linear_infinite]" />
                 <MockCamera />
-                <div className="absolute top-[55%] md:top-[58%] z-10 animate-[slideDown_1s_ease-out_forwards]">
+                <div className="absolute top-[54%] md:top-[56%] z-10 animate-[slideDown_1s_ease-out_forwards]">
                     <MockPhoto src="https://cdn.explorecams.com/storage/photos/OuPA14axhO_440.jpg" rotate={-2} type="classic" />
                 </div>
-                <MockPhoto src="https://cdn.explorecams.com/storage/photos/7m1zHuTP1U_440.jpg" rotate={-12} type="polaroid" className="top-10 left-[-20px] md:left-20 md:top-20 opacity-0 animate-[fadeIn_0.8s_0.2s_ease-out_forwards]" />
-                <MockPhoto src="https://cdn.explorecams.com/storage/photos/h2pPo8kd6t_440.jpg" rotate={8} type="classic" className="top-16 right-[-10px] md:right-32 md:top-24 opacity-0 animate-[fadeIn_0.8s_0.4s_ease-out_forwards]" />
-                <MockPhoto src="https://cdn.explorecams.com/storage/photos/mBK0RHQZEA_440.jpg" rotate={15} type="polaroid" className="top-[-10px] left-[20%] md:left-[35%] opacity-0 scale-90 blur-[1px] z-0 animate-[fadeIn_0.8s_0.6s_ease-out_forwards]" />
-                <MockPhoto src="https://cdn.explorecams.com/storage/photos/RwDI4UkALl_440.jpg" rotate={-6} type="classic" className="bottom-0 right-[5%] md:right-[15%] opacity-0 z-30 animate-[fadeIn_0.8s_0.5s_ease-out_forwards]" />
-                <MockPhoto src="https://cdn.explorecams.com/storage/photos/EC4imWR5bc_440.jpg" rotate={-18} type="classic" className="bottom-[-20px] left-[-15px] md:left-[10%] opacity-0 scale-75 blur-[0.5px] z-20 animate-[fadeIn_0.8s_0.7s_ease-out_forwards]" />
-                <MockPhoto src="https://cdn.explorecams.com/storage/photos/QA91U29X8u_440.jpg" rotate={22} type="polaroid" className="top-[-30px] right-[10%] md:right-[25%] opacity-0 scale-90 blur-[1px] z-0 animate-[fadeIn_0.8s_0.8s_ease-out_forwards]" />
-                <MockPhoto src="https://cdn.explorecams.com/storage/photos/8wSsc9ZaYg_440.jpg" rotate={5} type="classic" className="top-[40%] left-[-30px] md:left-[18%] opacity-0 scale-90 z-0 animate-[fadeIn_0.8s_0.9s_ease-out_forwards]" />
-                <MockPhoto src="https://cdn.explorecams.com/storage/photos/wQzrj8P004_440.jpg" rotate={-4} type="polaroid" className="top-[50%] right-[-20px] md:right-[8%] opacity-0 scale-95 z-20 animate-[fadeIn_0.8s_1.0s_ease-out_forwards]" />
-                <MockPhoto src="https://cdn.explorecams.com/storage/photos/aSv6uLVElh_440.jpg" rotate={-25} type="classic" className="top-[-20px] left-[5%] md:left-[5%] opacity-0 scale-75 blur-[1px] z-20 animate-[fadeIn_0.8s_1.1s_ease-out_forwards]" />
+                <MockPhoto src="https://cdn.explorecams.com/storage/photos/7m1zHuTP1U_440.jpg" rotate={-12} type="polaroid" className="top-7 left-[-28px] sm:left-[3%] md:left-[12%] opacity-0 animate-[fadeIn_0.8s_0.2s_ease-out_forwards]" />
+                <MockPhoto src="https://cdn.explorecams.com/storage/photos/h2pPo8kd6t_440.jpg" rotate={8} type="classic" className="top-10 right-[-24px] sm:right-[4%] md:right-[15%] opacity-0 animate-[fadeIn_0.8s_0.4s_ease-out_forwards]" />
+                <MockPhoto src="https://cdn.explorecams.com/storage/photos/mBK0RHQZEA_440.jpg" rotate={15} type="polaroid" className="top-[-12px] left-[20%] md:left-[29%] opacity-0 scale-90 blur-[1px] z-0 animate-[fadeIn_0.8s_0.6s_ease-out_forwards]" />
+                <MockPhoto src="https://cdn.explorecams.com/storage/photos/RwDI4UkALl_440.jpg" rotate={-6} type="classic" className="bottom-[-16px] right-[1%] md:right-[10%] opacity-0 z-30 animate-[fadeIn_0.8s_0.5s_ease-out_forwards]" />
+                <MockPhoto src="https://cdn.explorecams.com/storage/photos/EC4imWR5bc_440.jpg" rotate={-18} type="classic" className="bottom-[-34px] left-[-30px] md:left-[8%] opacity-0 scale-75 blur-[0.5px] z-20 animate-[fadeIn_0.8s_0.7s_ease-out_forwards]" />
+                <MockPhoto src="https://cdn.explorecams.com/storage/photos/QA91U29X8u_440.jpg" rotate={22} type="polaroid" className="top-[-24px] right-[12%] md:right-[25%] opacity-0 scale-90 blur-[1px] z-0 animate-[fadeIn_0.8s_0.8s_ease-out_forwards]" />
             </div>
             <div className="relative z-50">
-                <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight drop-shadow-sm leading-tight max-w-4xl mx-auto">{t.landingTitle}</h1>
-                <p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-lg mx-auto">{t.landingSubtitle}</p>
-                <button onClick={() => fileInputRef.current?.click()} className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#D40000] text-white rounded-full font-bold text-lg shadow-[0_10px_30px_-10px_rgba(212,0,0,0.5)] hover:bg-[#b30000] transition-all duration-300 overflow-hidden">
+                <h1 className="text-[2.55rem] sm:text-5xl md:text-6xl font-black text-gray-900 mb-5 tracking-[-0.055em] leading-[1.06] max-w-4xl mx-auto">{t.landingTitle}</h1>
+                <p className="text-[15px] md:text-lg text-gray-500 mb-7 md:mb-8 leading-relaxed max-w-xl mx-auto">{t.landingSubtitle}</p>
+                <button onClick={() => fileInputRef.current?.click()} className="group relative inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-[#D40000] text-white rounded-full font-bold text-base shadow-[0_16px_34px_-14px_rgba(212,0,0,0.7)] hover:bg-[#b30000] hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
-                    <Upload className="w-5 h-5" />
+                    <Upload className="w-4 h-4" />
                     {t.landingBtn}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                 </button>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-gray-500">
+                    <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#D40000]" />{t.landingPrivate}</span>
+                    <span className="h-3 w-px bg-gray-300 hidden sm:block" />
+                    <span>{t.landingTemplates}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -194,12 +204,14 @@ const App: React.FC = () => {
 
   return (
     <div className="h-[100dvh] w-screen bg-gray-100 flex flex-col font-sans overflow-hidden">
-        <header className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-6 z-50 shadow-sm shrink-0">
-             <div className="flex items-center gap-2">
-                 <Camera className="w-5 h-5 text-red-600" />
-                 <h1 className="font-bold text-lg tracking-tight text-gray-900">{t.appTitle}</h1>
+        <header className="h-16 bg-white/85 border-b border-gray-200/70 flex items-center justify-between px-5 md:px-8 z-50 backdrop-blur-xl shrink-0">
+             <div className="flex items-center gap-2.5">
+                 <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-50 text-red-600"><Camera className="w-4 h-4" /></span>
+                 <h1 className="font-bold text-[17px] tracking-tight text-gray-900">{t.appTitle}</h1>
+                 <span className="hidden sm:inline-block h-4 w-px bg-gray-200" />
+                 <span className="hidden sm:inline text-[10px] font-bold tracking-[0.16em] text-gray-400">PHOTO STUDIO</span>
              </div>
-             <button onClick={() => setLang(l => l === 'en' ? 'zh' : 'en')} className="p-1.5 hover:bg-gray-100 rounded-md transition-colors text-gray-600 flex items-center gap-1 text-xs font-medium">
+             <button onClick={() => setLang(l => l === 'en' ? 'zh' : 'en')} className="rounded-full border border-gray-200/80 bg-white px-2.5 py-1.5 hover:bg-gray-50 transition-colors text-gray-600 flex items-center gap-1.5 text-xs font-semibold shadow-sm">
                  <Globe className="w-3.5 h-3.5" />
                  {lang.toUpperCase()}
              </button>
@@ -293,3 +305,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+
